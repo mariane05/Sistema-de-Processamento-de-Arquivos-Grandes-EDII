@@ -1,4 +1,5 @@
 **Repositório para o trabalho prático de Estruturas de Dados II**
+
 **Objetivo Geral:** Projetar e implementar uma ferramenta de linha de comando
 (CLI) para compressão e busca de substrings em arquivos de texto, com foco no
 processamento de dados que excedem a memória RAM disponível. O projeto visa
