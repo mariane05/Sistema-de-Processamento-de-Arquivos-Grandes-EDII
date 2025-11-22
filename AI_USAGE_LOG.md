@@ -19,7 +19,75 @@ O uso de IA foi permitido para as seguintes finalidades:
 
 *Copie e preencha o template abaixo para cada interação relevante.*
 
+---
+
+### Interação XPTO
+
+- **Data:** loremipsumdolorsitarmet
+
+- **Etapa do Projeto:** loremipsumdolorsitarmet
+
+- **Ferramenta de IA Utilizada:** loremipsumdolorsitarmet
+
+- **Objetivo da Consulta:** loremipsumdolorsitarmet
+
+- **Prompt(s) Utilizado(s):**
+    1. "loremipsumdolorsitarmet"
+    2. "loremipsumdolorsitarmet"
+
+- **Resumo da Resposta da IA:**
+    loremipsumdolorsitarmet
+
+- **Análise e Aplicação:**
+    loremipsumdolorsitarmet
+
+- **Referência no Código:**
+    loremipsumdolorsitarmet
+
+
+---
+
+---
+
 ### Interação 1
+
+- **Data:** 22/10/2025
+
+- **Etapa do Projeto:** 0 - Criação do Projeto
+
+- **Ferramenta de IA Utilizada:** Chat GPT (Free License)
+
+- **Objetivo da Consulta:** Apesar de ter concordado em realizar o trabalho em C#, eu não tinha conhecimento de como eram estruturados projetos em C#, ainda mais para a forma em que precisávamos trabalhar (3 módulos separados que rodariam independentemente).
+
+- **Prompt(s) Utilizado(s):**
+    0. *(prompts anteriores sobre instalação do ambiente no Linux)*
+    1. "Agora eu quero criar um novo projeto, que vai ser um programa CLI, separado em 3 módulos principais. Como eu faço isso?"
+    2. "Então, na real que o programa não vai ter um módulo principal, tipo uma main. Cada programa vai fazer sua própria execução. Alguns vão usar arquivos deixados por outros, mas não vão precisar interagir com os módulos rodando em tempo real. Dá uma olhada na descrição das etapas. Eu quero separar cada etapa em um módulo, já que cada um vai precisar ter seu próprio comando cli para rodar (preste atenção nisso ao ler a especificação do projeto)."
+    <br>
+    [copiei e colei o enunciado do projeto aqui, das linhas 31 até 72 (ln 31 ~ 72)](https://gitlab.com/ds143-alexkutzke/project-02-2025/-/blob/main/README.md?ref_type=heads&plain=1)
+    <br>
+
+- **Resumo da Resposta da IA:**
+    Ela explicou quais comandos rodar para uma aplicação, começando com a ideia de ter um módulo que coordenava outros, como em um projeto Java. Depois de eu ter explicado mais específicamente o que eu precisava, ela me mostrou os comandos para criar uma solution (aparentemente é o nome de um projeto no C#), criar sub módulos e adicionar esses submódulos à aplicação sln. 
+    Ela também comentou de criar um `wrapper script` para gerenciar os comandos cli para rodar cada módulo separadamente, e.g., `meu_programa compactar <arquivo_original> <arquivo_compactado>`. Essa ideia será analisada mais futuramente.
+
+- **Análise e Aplicação:**
+    Isso ajudou á estruturar a parte inicial do projeto e separar eles em pastas e módulos bem definidos, de modo que os projetos de cada um não entrassem em conflito diretamente.
+
+- **Referência no Código:**
+    Nenhuma. Apenas os exemplos de comandos executados (não foram exatamente esses):
+    - `mkdir` MeuProjeto
+    - `cd` MeuProjeto
+    - `dotnet` new sln -n MeuProjetoEmCSharp
+    - `dotnet` new console -o Etapa1_Compressao
+    - `dotnet` new console -o Etapa2_BuscaSimples
+    - `dotnet` new console -o Etapa3_BuscaNoCompactado
+    - `dotnet` sln add Etapa1_Compressao Etapa2_BuscaSimples Etapa3_BuscaCompactado
+
+
+---
+
+### `Interação Exemplo (APAGAR NO FINAL)`
 
 - **Data:** 20/10/2025
 - **Etapa do Projeto:** 1 - Compressão de Arquivos
