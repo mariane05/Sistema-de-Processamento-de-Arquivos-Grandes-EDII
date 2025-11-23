@@ -4,12 +4,31 @@ public class CompressaoApp
 {
     public static void InitApp()
     {
-        TesteInicial();
+        testeLerArquivo();
     }
     
-    public static void TesteInicial()
+
+    public static void testeLerArquivo()
     {
-        Console.WriteLine("Hello Compressão");
+        string caminhoArquivo = "../../livro01.txt";
+        string primeiraLinhaLida = lerPrimeiraLinhaArquivo(caminhoArquivo);
+        Console.WriteLine(primeiraLinhaLida);
     }
+
+    static string lerPrimeiraLinhaArquivo(string caminhoArquivo)
+    {
+        string? primeiraLinha;
+
+        if(File.Exists(caminhoArquivo)) return $"Arquivo {caminhoArquivo} não encontrado";
+        
+        using (StreamReader reader = new StreamReader(caminhoArquivo))
+        {
+            primeiraLinha = reader.ReadLine();
+
+            if(primeiraLinha == null) return "O arquivo está vazio";
+        }
+
+        return primeiraLinha;
+    } 
     
 }
