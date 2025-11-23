@@ -1,0 +1,29 @@
+## builds
+bin/
+obj/
+out/
+Debug/
+
+## coisas do vscode
+.vscode/
+*.code-workspace
+
+## dotnet tools
+./tools
+*.Assembly
+
+## logs
+*.log
+
+## packages do nuget
+/packages
+*.nupkg
+
+## outros arquivos
+*.cache
+*.dll
+*.exe
+*.tmp
+*.temp
+
+
