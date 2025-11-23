@@ -6,6 +6,7 @@ public class CompressaoApp
     {
         TesteInicial();
     }
+    
     public static void TesteInicial()
     {
         Console.WriteLine("Hello Compressão");
