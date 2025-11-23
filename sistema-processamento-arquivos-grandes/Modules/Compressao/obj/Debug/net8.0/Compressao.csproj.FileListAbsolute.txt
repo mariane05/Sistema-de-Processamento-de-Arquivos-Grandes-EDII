@@ -1,0 +1,12 @@
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/bin/Debug/net8.0/Compressao.deps.json
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/bin/Debug/net8.0/Compressao.dll
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/bin/Debug/net8.0/Compressao.pdb
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/obj/Debug/net8.0/Compressao.GeneratedMSBuildEditorConfig.editorconfig
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/obj/Debug/net8.0/Compressao.AssemblyInfoInputs.cache
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/obj/Debug/net8.0/Compressao.AssemblyInfo.cs
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/obj/Debug/net8.0/Compressao.csproj.CoreCompileInputs.cache
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/obj/Debug/net8.0/Compressao.sourcelink.json
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/obj/Debug/net8.0/Compressao.dll
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/obj/Debug/net8.0/refint/Compressao.dll
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/obj/Debug/net8.0/Compressao.pdb
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/Compressao/obj/Debug/net8.0/ref/Compressao.dll

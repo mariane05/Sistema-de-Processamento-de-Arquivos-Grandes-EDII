@@ -1,0 +1,58 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "AppSpag/1.0.0": {
+        "dependencies": {
+          "BuscaArquivoCompactado": "1.0.0",
+          "BuscaArquivoGrande": "1.0.0",
+          "Compressao": "1.0.0"
+        },
+        "runtime": {
+          "AppSpag.dll": {}
+        }
+      },
+      "BuscaArquivoCompactado/1.0.0": {
+        "runtime": {
+          "BuscaArquivoCompactado.dll": {}
+        }
+      },
+      "BuscaArquivoGrande/1.0.0": {
+        "runtime": {
+          "BuscaArquivoGrande.dll": {}
+        }
+      },
+      "Compressao/1.0.0": {
+        "runtime": {
+          "Compressao.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AppSpag/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BuscaArquivoCompactado/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BuscaArquivoGrande/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Compressao/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
