@@ -1,0 +1,12 @@
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/bin/Debug/net8.0/BuscaArquivoGrande.deps.json
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/bin/Debug/net8.0/BuscaArquivoGrande.dll
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/bin/Debug/net8.0/BuscaArquivoGrande.pdb
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/obj/Debug/net8.0/BuscaArquivoGrande.GeneratedMSBuildEditorConfig.editorconfig
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/obj/Debug/net8.0/BuscaArquivoGrande.AssemblyInfoInputs.cache
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/obj/Debug/net8.0/BuscaArquivoGrande.AssemblyInfo.cs
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/obj/Debug/net8.0/BuscaArquivoGrande.csproj.CoreCompileInputs.cache
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/obj/Debug/net8.0/BuscaArquivoGrande.sourcelink.json
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/obj/Debug/net8.0/BuscaArquivoGrande.dll
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/obj/Debug/net8.0/refint/BuscaArquivoGrande.dll
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/obj/Debug/net8.0/BuscaArquivoGrande.pdb
+/home/vic/Documents/zzz-ed2-trabalho/Sistema-de-Processamento-de-Arquivos-Grandes-EDII/sistema-processamento-arquivos-grandes/Modules/BuscaArquivoGrande/obj/Debug/net8.0/ref/BuscaArquivoGrande.dll

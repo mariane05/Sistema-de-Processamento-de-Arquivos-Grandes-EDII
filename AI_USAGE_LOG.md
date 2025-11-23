@@ -32,17 +32,17 @@ O uso de IA foi permitido para as seguintes finalidades:
 - **Objetivo da Consulta:** loremipsumdolorsitarmet
 
 - **Prompt(s) Utilizado(s):**
-    1. "loremipsumdolorsitarmet"
-    2. "loremipsumdolorsitarmet"
+  1. "loremipsumdolorsitarmet"
+  2. "loremipsumdolorsitarmet"
 
 - **Resumo da Resposta da IA:**
-    loremipsumdolorsitarmet
+  loremipsumdolorsitarmet
 
 - **Análise e Aplicação:**
-    loremipsumdolorsitarmet
+  loremipsumdolorsitarmet
 
 - **Referência no Código:**
-    loremipsumdolorsitarmet
+  loremipsumdolorsitarmet
 
 
 ---
@@ -60,30 +60,94 @@ O uso de IA foi permitido para as seguintes finalidades:
 - **Objetivo da Consulta:** Apesar de ter concordado em realizar o trabalho em C#, eu não tinha conhecimento de como eram estruturados projetos em C#, ainda mais para a forma em que precisávamos trabalhar (3 módulos separados que rodariam independentemente).
 
 - **Prompt(s) Utilizado(s):**
-    0. *(prompts anteriores sobre instalação do ambiente no Linux)*
-    1. "Agora eu quero criar um novo projeto, que vai ser um programa CLI, separado em 3 módulos principais. Como eu faço isso?"
-    2. "Então, na real que o programa não vai ter um módulo principal, tipo uma main. Cada programa vai fazer sua própria execução. Alguns vão usar arquivos deixados por outros, mas não vão precisar interagir com os módulos rodando em tempo real. Dá uma olhada na descrição das etapas. Eu quero separar cada etapa em um módulo, já que cada um vai precisar ter seu próprio comando cli para rodar (preste atenção nisso ao ler a especificação do projeto)."
-    <br>
-    [copiei e colei o enunciado do projeto aqui, das linhas 31 até 72 (ln 31 ~ 72)](https://gitlab.com/ds143-alexkutzke/project-02-2025/-/blob/main/README.md?ref_type=heads&plain=1)
-    <br>
+  0. *(prompts anteriores sobre instalação do ambiente no Linux)*
+  1. "Agora eu quero criar um novo projeto, que vai ser um programa CLI, separado em 3 módulos principais. Como eu faço isso?"
+  2. "Então, na real que o programa não vai ter um módulo principal, tipo uma main. Cada programa vai fazer sua própria execução. Alguns vão usar arquivos deixados por outros, mas não vão precisar interagir com os módulos rodando em tempo real. Dá uma olhada na descrição das etapas. Eu quero separar cada etapa em um módulo, já que cada um vai precisar ter seu próprio comando cli para rodar (preste atenção nisso ao ler a especificação do projeto)."
+  <br>
+  [copiei e colei o enunciado do projeto aqui, das linhas 31 até 72 (ln 31 ~ 72)](https://gitlab.com/ds143-alexkutzke/project-02-2025/-/blob/main/README.md?ref_type=heads&plain=1)
+  <br>
 
 - **Resumo da Resposta da IA:**
-    Ela explicou quais comandos rodar para uma aplicação, começando com a ideia de ter um módulo que coordenava outros, como em um projeto Java. Depois de eu ter explicado mais específicamente o que eu precisava, ela me mostrou os comandos para criar uma solution (aparentemente é o nome de um projeto no C#), criar sub módulos e adicionar esses submódulos à aplicação sln. 
-    Ela também comentou de criar um `wrapper script` para gerenciar os comandos cli para rodar cada módulo separadamente, e.g., `meu_programa compactar <arquivo_original> <arquivo_compactado>`. Essa ideia será analisada mais futuramente.
+  Ela explicou quais comandos rodar para uma aplicação, começando com a ideia de ter um módulo que coordenava outros, como em um projeto Java. Depois de eu ter explicado mais específicamente o que eu precisava, ela me mostrou os comandos para criar uma solution (aparentemente é o nome de um projeto no C#), criar sub módulos e adicionar esses submódulos à aplicação sln. 
+  Ela também comentou de criar um `wrapper script` para gerenciar os comandos cli para rodar cada módulo separadamente, e.g., `meu_programa compactar <arquivo_original> <arquivo_compactado>`. Essa ideia será analisada mais futuramente.
 
 - **Análise e Aplicação:**
-    Isso ajudou á estruturar a parte inicial do projeto e separar eles em pastas e módulos bem definidos, de modo que os projetos de cada um não entrassem em conflito diretamente.
+  Isso ajudou á estruturar a parte inicial do projeto e separar eles em pastas e módulos bem definidos, de modo que os projetos de cada um não entrassem em conflito diretamente.
 
 - **Referência no Código:**
-    Nenhuma. Apenas os exemplos de comandos executados (não foram exatamente esses):
-    - `mkdir` MeuProjeto
-    - `cd` MeuProjeto
-    - `dotnet` new sln -n MeuProjetoEmCSharp
-    - `dotnet` new console -o Etapa1_Compressao
-    - `dotnet` new console -o Etapa2_BuscaSimples
-    - `dotnet` new console -o Etapa3_BuscaNoCompactado
-    - `dotnet` sln add Etapa1_Compressao Etapa2_BuscaSimples Etapa3_BuscaCompactado
+  Nenhuma. Apenas os exemplos de comandos executados (não foram exatamente esses):
+  - `mkdir` MeuProjeto
+  - `cd` MeuProjeto
+  - `dotnet` new sln -n MeuProjetoEmCSharp
+  - `dotnet` new console -o Etapa1_Compressao
+  - `dotnet` new console -o Etapa2_BuscaSimples
+  - `dotnet` new console -o Etapa3_BuscaNoCompactado
+  - `dotnet` sln add Etapa1_Compressao Etapa2_BuscaSimples Etapa3_BuscaCompactado
 
+
+---
+---
+
+### Interação 2
+
+- **Data:** 23/10/2025
+
+- **Etapa do Projeto:** 0 - Criação do Projeto
+
+- **Ferramenta de IA Utilizada:** Chat GPT (Free License)
+
+- **Objetivo da Consulta:** Enquanto tentava saber como fazer pra ler um arquivo via parâmetro do console, descobri que a estrutura de projeto que o gpt me mandou criar não funcionava bem, principalmente com as requisições passadas pelo professor de que, no terminal, seria passado o nome da aplicação + parâmetros para execução da mesma. Para fazer isso, eu não podia ter 3 projetos como console, mas sim, apenas um console e o resto teria que ser transformado em classLib. Fui concertar o problema.
+
+- **Prompt(s) Utilizado(s):**
+  1. "Tá, então vamos com calma. o meu programa não tem nenhuma forma cli ainda de funcionar. Como eu faço pra ele receber, via terminal, parâmetros? E como eu lido com eles?"
+  2. "Tá, mas não faz setindo eu fazer esse switch aí pro primeiro argumento, sendo que eu to executando na pasta do meu projeto solo. Se for pra usar isso dessa forma, é melhor eu criar um arquivo de execução na raiz da solution e que daí desse arquivo, serão chamados os módulos, não concorda?"
+  3. "Você tem noção de que você me fez dar voltas e voltas, não me explicou nada disso e fez eu criar o projeto inteiramente errado?"
+  4. "Tá... e vou fazer o seguinte então: vou criar um novo sln e um novo projeto de console, que vai orquestrar os outros 3. Então planejo recriar os outros 3 como libs em vez de apps. De acordo com as melhores práticas de desenvolvimento em C#, isso procede?"
+  5. "Tá, me explica o que esse código aqui que você mostrou quer dizer: dotnet add Orchestra/Orchestra.csproj reference Compressao/Compressao.csproj Esse 'Orchestra' seria esse app principal, que vai chamar cada uma das libs? Ou é um nome específico que eu tenho que seguir?"
+  6. "Tá, e esses módulos que serão libs... seria recomendado, de acordo com as melhores práticas de desenvolvimento, colocar os 3 aninhados dentro de uma pasta? ou deixo eles 'lado a lado' com o projeto principal/orquestrador?"
+  7. "Certo, o que eu fiz foi: Na raiz do projeto (mas na pasta sistema-de-processamento-de-arquivos-grandes, que é a pasta onde os módulos originais foram criados), eu criei um novo consoleApp chamado 'AppSpag'. Depois eu criei uma pasta chamada 'Modules' e dentro dela eu criei, dessa vez como classlib, cada um dos novos módulos. Agora eu tenho que associar esses arquivos/projetos ao meu sln total, ao mesmo tempo que eu tenho que remover os projetos antigos, porque, imagino que se eu for rodar o C# e um projeto que tá listado dentro do .sln, vai dar erro de compilação não é?"
+
+- **Resumo da Resposta da IA:**
+  Ela pediu desculpas por ter me feito errar no projeto e foi me guiando passo a passo em como eu deveria criar e modificar a estrutura atual do projeto para concertar o problema.
+
+- **Análise e Aplicação:**
+  Foi interessante ver em como confiamos tão cegamente em IA's as vezes. De toda forma, foi muito útil eu poder debater e discutir como criar um projeto em C# do zero, coisa que sozinho, pesquisando por aí na web, eu ia demorar um bom tempo pra reunir todas as informações específicas que eu precisava para o meu caso. A IA também deu algumas recomendações muito simplistas e algumas verbosas demais. Optei por um meio termo e, analisando a pilha de comandos que ela me mandou executar, reuní esses que foram os realmente úteis, em ordem de implementação pra resolver o problema.
+  ```bash
+      # Cria o projeto principal/orquestrador
+      dotnet new console -o AppSpag
+
+      # Cria os módulos, desta vez como classlib
+      mkdir Modules
+      cd Modules
+      dotnet new classlib -o Compressao
+      dotnet new classlib -o BuscaArquivoGrande
+      dotnet new classlib -o BuscaArquivoCompactado
+
+      # Lista os projetos associados à solution do projeto
+      dotnet sln SistemaProcessamentoArquivosGrandes.sln list
+
+      # Remove os projetos criados anteriormente
+      dotnet sln SistemaProcessamentoArquivosGrandes.sln remove BuscaArquivoCompactado/BuscaArquivoCompactado.csproj
+      dotnet sln SistemaProcessamentoArquivosGrandes.sln remove BuscaArquivoGrande/BuscaArquivoGrande.csproj
+      dotnet sln SistemaProcessamentoArquivosGrandes.sln remove Compressao/Compressao.csproj 
+
+      # Adiciona o novo projeto principal junto com os novos módulos
+      dotnet sln SistemaProcessamentoArquivosGrandes.sln add AppSpag/AppSpag.csproj
+      dotnet sln SistemaProcessamentoArquivosGrandes.sln add Modules/BuscaArquivoCompactado/BuscaArquivoCompactado.csproj
+      dotnet sln SistemaProcessamentoArquivosGrandes.sln add Modules/BuscaArquivoGrande/BuscaArquivoGrande.csproj
+      dotnet sln SistemaProcessamentoArquivosGrandes.sln add Modules/Compressao/Compressao.csproj 
+
+      # Adiciona os módulos ao projeto principal
+      dotnet add AppSpag/AppSpag.csproj reference Modules/BuscaArquivoCompactado/BuscaArquivoCompactado.csproj
+      dotnet add AppSpag/AppSpag.csproj reference Modules/BuscaArquivoGrande/BuscaArquivoGrande.csproj
+      dotnet add AppSpag/AppSpag.csproj reference Modules/Compressao/Compressao.csproj
+
+      # testa pra ver se deu tudo certo
+      dotnet build
+    ```
+
+- **Referência no Código:**
+  Nenhuma. Porém a organização das pastas é um reflexo disso aí.
 
 ---
 
