@@ -38,5 +38,8 @@ public class CompressaoApp
         
         
     } 
+
+
+    // public static Dictionary <char, long> construirTabelaDeFrequências
     
 }
