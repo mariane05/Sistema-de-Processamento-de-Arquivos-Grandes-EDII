@@ -33,16 +33,22 @@ public class CompressaoApp
     {
         string? primeiraLinha;
 
-        if(File.Exists(caminhoArquivo)) return $"Arquivo {caminhoArquivo} não encontrado";
-        
-        using (StreamReader reader = new StreamReader(caminhoArquivo))
+        if(File.Exists(caminhoArquivo))
         {
-            primeiraLinha = reader.ReadLine();
+            using (StreamReader reader = new StreamReader(caminhoArquivo))
+            {
+                primeiraLinha = reader.ReadLine();
 
-            if(primeiraLinha == null) return "O arquivo está vazio";
+                if(primeiraLinha == null) return "O arquivo está vazio";
+            }
+
+            return primeiraLinha;    
+        } else {
+            
+            return $"Arquivo {caminhoArquivo} não encontrado";
         }
-
-        return primeiraLinha;
+        
+        
     } 
     
 }
