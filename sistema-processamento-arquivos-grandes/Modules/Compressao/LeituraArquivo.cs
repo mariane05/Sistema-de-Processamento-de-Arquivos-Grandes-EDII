@@ -18,6 +18,8 @@ public static class LeituraArquivo
             throw new Exception("Não foi encontrado o nome do arquivo para ser lido!");
         }
 
+        Console.WriteLine("Finalizada a separação de caminhos");
+
         return args[1];
     }
 

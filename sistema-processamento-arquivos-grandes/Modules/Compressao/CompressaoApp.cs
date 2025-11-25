@@ -6,8 +6,9 @@ public class CompressaoApp
     {
         string caminhoArquivo = LeituraArquivo.separaCaminhoDoArquivo(args);
         var dicionarioDeFrequencias = DicionarioFrequencia.construirDicionarioDeFrequências(caminhoArquivo);
+        // DicionarioFrequencia.testeGerarDicionarioFrequencia(caminhoArquivo);
         
-        Console.WriteLine("Finalizado!");
+        Console.WriteLine("Finalizada a Compressao");
     }
     
 

@@ -8,6 +8,8 @@ public static class DicionarioFrequencia
         
         var dicionarioDeFrequencias = construirDicionarioDeFrequências(caminhoArquivo);
         lerDicionarioDeFrequências(dicionarioDeFrequencias);
+
+        Console.WriteLine("Finalizado o teste de geração de Dicionário");
     }
 
 
@@ -30,11 +32,15 @@ public static class DicionarioFrequencia
             }
         }
 
+        Console.WriteLine("Finalizada a criação do dicionário de frequências");
+
         return frequencyDic;
     }
 
     public static void lerDicionarioDeFrequências(Dictionary <char, long> dic)
     {
+        Console.WriteLine("Iniciando a leitura do dicionário de Frequências");
+
         foreach(var item in dic)
             Console.WriteLine($"Caractere: '{item.Key}'; Ocorrências: ${item.Value}");
     }
