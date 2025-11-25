@@ -12,9 +12,12 @@ public class CompressaoApp
     public static void testeLerArquivo(string caminhoArquivo)
     {
         
-        string primeiraLinhaLida = lerPrimeiraLinhaArquivo(caminhoArquivo);
-        Console.WriteLine(primeiraLinhaLida);
+        var dicionarioDeFrequencias = construirDicionarioDeFrequências(caminhoArquivo);
+        lerDicionarioDeFrequências(dicionarioDeFrequencias);
     }
+
+
+
 
 
     static string lerPrimeiraLinhaArquivo(string caminhoArquivo)
