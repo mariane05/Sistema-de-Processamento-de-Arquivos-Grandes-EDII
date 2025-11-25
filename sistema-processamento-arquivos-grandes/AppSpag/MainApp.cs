@@ -36,11 +36,6 @@ public class MainApp ()
     public static void validaParamsCompressao(string[] args)
     {
         //TODO: adicionar validações dos parâmetros <arquivo_original> && <arquivo_compactado> ao chamar o módulo
-        if (args[1] == null || args[1].Length == 0)
-        {
-            Console.WriteLine("Não foi encontrado o nome do arquivo para ser lido!");
-            return;
-        }
 
         /*
         IMPLEMENTAR DEPOIS QUE A COMPRESSÃO ESTIVER CERTINHO
