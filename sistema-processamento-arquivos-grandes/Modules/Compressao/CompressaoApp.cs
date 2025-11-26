@@ -34,24 +34,24 @@ public class CompressaoApp
         using FileStream fsEntrada = new FileStream(caminhoEntrada, FileMode.Open, FileAccess.Read);
         long tamanhoOriginalTotalBytes = fsEntrada.Length;
 
-        // calcula número de blocos em bytes para saber quantos blocos teremos
+        // calcula número de blocos de 64k que serão gerados
         int numeroBlocos = (int)((tamanhoOriginalTotalBytes + TAMANHO_BLOCO - 1) / TAMANHO_BLOCO);
 
         using FileStream fsSaida = new FileStream(caminhoSaida, FileMode.Create, FileAccess.Write);
         using BinaryWriter writer = new BinaryWriter(fsSaida, Encoding.UTF8);
 
-        // 1) escreve cabeçalho geral (tamanho total + número de blocos)
+        // cabeçalho geral do arquivo
         writer.Write(tamanhoOriginalTotalBytes);
         writer.Write(numeroBlocos);
 
-        // 2) reserva espaço para o índice
+        //reserva espaço para os índices de cada bloco
         long posInicioIndice = fsSaida.Position;
         int tamanhoEntradaIndice = sizeof(long) + sizeof(int) + sizeof(long) + sizeof(int); // 8+4+8+4 = 24
         long tamanhoIndiceTotal = (long)numeroBlocos * tamanhoEntradaIndice;
 
-        writer.Write(new byte[tamanhoIndiceTotal]); // reserva com zeros
+        writer.Write(new byte[tamanhoIndiceTotal]);
 
-        // 3) processa os blocos
+        // processa os blocos
         var indiceBlocos = new EntradaIndiceBlocos[numeroBlocos];
 
         long offsetOriginalEmChars = 0; // mede em caracteres

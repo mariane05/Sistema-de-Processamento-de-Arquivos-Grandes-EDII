@@ -35,7 +35,27 @@ Onde:
 Em cada módulo foi criado um método chamado estático chamado `InitApp`, que é o ponto de entrada da chamada do `MainApp`
 
 ## Etapa 1
-### Título etapa 1
+### Cabeçalho
+
+      [1 byte] quantidade_de_caracteres
+      [10 bytes por caractere]
+         - 2 bytes: caractere (UTF16)
+         - 8 bytes: frequência
+      [dados_comprimidos]
+
+
+### Estrutura geral do arquivo adotada:
+
+      [12 bytes] Cabeçalho Geral do Arquivo
+         - 8 bytes: tamanho original (em bytes, long)
+         - 4 bytes: quantidade de blocos (int)
+      [24 * (quantidade de blocos) bytes] Área de índices de cada bloco
+         [24 bytes] Índice do bloco
+            - 8 bytes: Offset original
+            - 4 bytes: Tamanho original do bloco
+            - 8 bytes: Offset após a compressão
+            - 4 bytes: Tamanho do bloco comprimido
+      [etc...] Blocos de bytes comprimidos
 
 ## Etapa 2
 ### Design da Busca Simples

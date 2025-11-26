@@ -28,6 +28,10 @@ public class MainApp
                 ValidaParamsBuscaArquivoCompactado(args);
                 break;
 
+            case "descompactar":
+                DescompactaUmArquivo(args);
+                break;
+
             default:
                 Console.WriteLine("Programa não encontrado");
                 break;
@@ -87,5 +91,22 @@ public class MainApp
 
         // Chamada correta com args
         BuscarArquivoComprimidoApp.InitApp(args);
+    }
+
+    private static void DescompactaUmArquivo(string[] args)
+    {
+        if (args.Length < 3)
+        {
+            Console.WriteLine("Parâmetros insuficientes para compactar. Uso:");
+            Console.WriteLine("compactar <arquivo_original> <arquivo_compactado>");
+            return;
+        }
+
+        var caminhoArquivoCompactado = args[1];
+        var nomeArquivoDescompactado = args[2];
+
+        // if(caminhoArquivoCompactado.)
+
+        Descompressao.Descomprimir(caminhoArquivoCompactado, nomeArquivoDescompactado);
     }
 }
