@@ -223,12 +223,11 @@ A IA utilizou como referência conversas anteriores sobre tecnologias que eu gos
 - **Data:** 26/11/2025
 - **Etapa do Projeto:** Implementação de funcoes prontas para leitura de arquivos grandes em blocos
 - **Ferramenta de IA Utilizada:** Gemini Advanced
-- **Objetivo da Consulta:** O trabalho solicitava o requisito em que as funcao ultrapasse uso de memoria RAM disponivel para nao travar na execução
-- **Prompt(s) Utilizado(s):**
-  1. "Gemini, no momento estou usando a função File.ReadAllText porem o uso dessa funcao nao é recomendado, mostre funcoes prontas para leitura de arquivo que não corra o risco de travar o sistema"
+- **Objetivo da Consulta:** O trabalho exigia um requisito em que a função não ultrapassasse a quantidade de memória RAM disponível, evitando travamentos durante a execução.
+  1. "Gemini, no momento estou usando a função File.ReadAllText, porém o uso dessa função não é recomendado. Mostre funções prontas para leitura de arquivo que não corram o risco de travar o sistema."
 
 - **Resumo da Resposta da IA:**
-  A IA explicou listou 6 funcoes prontas do c# mostrando uso e vantangens de usar.
+  A IA explicou listou 6 funcoes prontas do c# mostrando uso e vantangens de cada um.
 
 - **Análise e Aplicação:**
   A resposta da IA foi util para implementar um dos requisitos do trabalho.
