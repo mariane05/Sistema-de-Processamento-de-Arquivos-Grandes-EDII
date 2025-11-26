@@ -74,7 +74,7 @@ public class BuscaArquivoGrandeApp
         for (int j = 0; j < tamanhoPadrao - 1; j++)
         {
             int codigoAsci = (int)padrao[j];
-            if (codigoAsci < 256)
+            if (codigoAsci < 255)
             {
                 tabela[(int)padrao[j]] = tamanhoPadrao - 1 - j;
             }
