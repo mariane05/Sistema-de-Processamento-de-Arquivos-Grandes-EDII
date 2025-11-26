@@ -13,7 +13,7 @@ public class BuscaArquivoGrandeApp
         int tamanhoBuffer = 85 * 1024; //85KB RECOMENDADO
         string caminhoArquivo = args[1];
         string padraoBusca = args[2].ToLower();
-        tabela = CriarTabela(padraoBusca, padraoBusca.Length);
+       
 
 
         List<int> resultadosBusca = new List<int>();
@@ -88,6 +88,7 @@ public class BuscaArquivoGrandeApp
         int tamanhoTexto = texto.Length;
         int tamanhoPadrao = padrao.Length;
         List<int> ocorrencias_padrao = new List<int>();
+        tabela = CriarTabela(padrao, padrao.Length);
 
         int i = tamanhoPadrao - 1;
 
