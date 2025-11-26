@@ -1,11 +1,9 @@
 ## Guia Rápido
----
 
 ## Pré-requisitos
 - .NET SDK 6.0 ou superior instalado
 - Projeto compilado como aplicação de console
 
----
 
 ## Build do Projeto
 
@@ -15,7 +13,6 @@ No diretório raiz:
 dotnet build
 ````
 
----
 
 ## 1. Compactar um Arquivo
 
@@ -31,7 +28,6 @@ dotnet run -- compactar <arquivo_original> <arquivo_compactado>
 dotnet run -- compactar dados/entrada.txt dados/entrada.comp
 ```
 
----
 
 ## 2. Busca Simples em Arquivo Não Compactado
 
@@ -49,7 +45,6 @@ dotnet run -- buscar_simples dados/entrada.txt "erro 404"
 
 Saída esperada: lista de offsets onde o padrão aparece no arquivo original.
 
----
 
 ## 3. Busca em Arquivo Compactado
 
