@@ -25,7 +25,7 @@ public static class GerarCodigosBinarios
     }
 
 
-    private static void gerarCodigosPorNoRecursivo(NoArvore no, string prefixo, Dictionary<char, string> dicCodigoCaractere)
+    private static void gerarCodigosPorNoRecursivo(NoArvore? no, string prefixo, Dictionary<char, string> dicCodigoCaractere)
     {
         if (no == null) return;
 

@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Diagnostics;
 using BuscaArquivoCompactado;
 using BuscaArquivoGrande;
@@ -6,7 +6,7 @@ using Compressao;
 
 public class MainApp
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         if (args == null || args.Length == 0)
         {
@@ -21,7 +21,7 @@ public class MainApp
                 break;
 
             case "buscar_simples":
-                ValidaParamsBuscaArquivoGrande(args);
+                await ValidaParamsBuscaArquivoGrande(args);
                 break;
 
             case "buscar_compactado":
@@ -54,7 +54,7 @@ public class MainApp
     }
 
     //BUSCA SIMPLES
-    private static void ValidaParamsBuscaArquivoGrande(string[] args)
+    private static async Task ValidaParamsBuscaArquivoGrande(string[] args)
     {
         // Esperado: buscar_simples <arquivo_original> "<substring>"
         if (args.Length < 3)
@@ -64,25 +64,14 @@ public class MainApp
             return;
         }
 
-        // Medição de desempenho
-        Stopwatch tempoExecucao = new Stopwatch();
-        tempoExecucao.Start();
-
-        Process processo = Process.GetCurrentProcess();
-        long memoriaAntes = processo.WorkingSet64;
-
         Console.WriteLine("Iniciando busca em arquivo grande (não compactado)...");
         Console.WriteLine($"Arquivo: {args[1]}");
         Console.WriteLine($"Padrão de busca: {args[2]}");
 
-        BuscaArquivoGrandeApp.InitApp(args);
+        await BuscaArquivoGrandeApp.InitApp(args);
 
-        tempoExecucao.Stop();
-        processo.Refresh();
-        long memoriaDepois = processo.WorkingSet64;
+    
 
-        Console.WriteLine($"Tempo de execução: {tempoExecucao.ElapsedMilliseconds} ms");
-        Console.WriteLine($"Uso de RAM: {(memoriaDepois - memoriaAntes) / 1024 / 1024} MB");
     }
 
     //BUSCA EM ARQUIVO COMPACTADO

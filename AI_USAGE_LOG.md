@@ -150,6 +150,105 @@ O uso de IA foi permitido para as seguintes finalidades:
   Nenhuma. Porém a organização das pastas é um reflexo disso aí.
 
 ---
+---
+
+### Iteração 3
+
+- **Data:** 11/11/2025
+- **Etapa do Projeto:** Arquitetura
+- **Ferramenta de IA Utilizada:** Gemini Advanced
+- **Objetivo da Consulta:** Descobrir qual linguagem de programação seria mais ideal para o trabalho, considerando a perfomance do codigo
+
+- **Prompt(s) Utilizado(s):**
+  1. "Preciso fazer um trabalho sobre compactacao e busca de substring. Qual linguagem é ideial para esse trabalho e por quê?"
+
+
+- **Resumo da Resposta da IA:**
+A IA utilizou como referência conversas anteriores sobre tecnologias que eu gostaria de estudar e recomendou C# e Java, apresentando pontos relevantes como desempenho e a existência de classes prontas para manipulação de arquivos.
+
+- **Análise e Aplicação:**
+  A resposta da IA foi útil para esclarecer as opções. Conversei com o grupo e apresentei a análise da IA, incluindo uma tabela comparativa entre Java, Python e C#.
+
+- **Referência no Código:**
+  Sem refencia no codigo
+
+---
+---
+
+
+### Iteração 4
+
+- **Data:** 24/11/2025
+- **Etapa do Projeto:** Escolha entre os algoritmos KMP E Boyer-Moore
+- **Ferramenta de IA Utilizada:** Gemini Advanced
+- **Objetivo da Consulta:** O trabalho envolvia recomendações de código, então a pesquisa foi direcionada à performance dos algoritmos e às possíveis dificuldades na implementação.
+- **Prompt(s) Utilizado(s):**
+  1. "Gemini, preciso desenvolver uma função que faz busca de string em um arquivo grande. Recomenda usar Knuth-Morris-Pratt (KMP) ou Boyer-Moore? Faça uma análise de cada um e mostre as dificuldades na implementação de cada um."
+
+- **Resumo da Resposta da IA:**
+  A IA explicou a diferença entre os algoritmos e simulou a criação de uma tabela-verdade para cada código, verificando por meio de perguntas se eu estava entendendo o algoritmo.
+
+- **Análise e Aplicação:**
+  A resposta da IA foi util para entender a diferença entre os algoritmos.
+
+- **Referência no Código:**
+  sem referencia no código
+
+
+---
+---
+
+### Iteração 5
+
+- **Data:** 26/11/2025
+- **Etapa do Projeto:** Implementação de funcoes prontas para leitura de arquivos grandes em blocos
+- **Ferramenta de IA Utilizada:** Gemini Advanced
+- **Objetivo da Consulta:** O trabalho exigia um requisito em que a função não ultrapassasse a quantidade de memória RAM disponível, evitando travamentos durante a execução.
+  1. "Gemini, no momento estou usando a função File.ReadAllText, porém o uso dessa função não é recomendado. Mostre funções prontas para leitura de arquivo que não corram o risco de travar o sistema."
+
+- **Resumo da Resposta da IA:**
+  A IA explicou listou 6 funcoes prontas do c# mostrando uso e vantangens de cada um.
+
+- **Análise e Aplicação:**
+  A resposta da IA foi util para implementar um dos requisitos do trabalho.
+
+- **Referência no Código:**
+trecho do código 
+```
+try
+{
+    using FileStream fs = new FileStream(
+        caminhoArquivo,
+        FileMode.Open,
+        FileAccess.Read,
+        FileShare.Read,
+        tamanhoBuffer,
+        FileOptions.SequentialScan
+    );
+
+    int bytesLidos;
+    while ((bytesLidos = await fs.ReadAsync(bufferLeitura, 0, bufferLeitura.Length)) > 0)
+    {
+        string texto = sobra + Encoding.UTF8.GetString(bufferLeitura, 0, bytesLidos);
+        resultadosBusca.AddRange(Buscar(texto.ToLower(), padraoBusca));
+
+        if (texto.Length >= padraoBusca.Length - 1)
+            sobra = texto[^(padraoBusca.Length - 1)..];
+        else
+            sobra = texto;
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Erro ao ler arquivo: " + ex.Message);
+    return;
+}
+```
+
+
+
+---
+---
 
 ### `Interação Exemplo (APAGAR NO FINAL)`
 
@@ -173,15 +272,3 @@ O uso de IA foi permitido para as seguintes finalidades:
 
 ---
 
-### Interação 2
-
-- **Data:** ...
-- **Etapa do Projeto:** ...
-- **Ferramenta de IA Utilizada:** ...
-- **Objetivo da Consulta:** ...
-- **Prompt(s) Utilizado(s):** ...
-- **Resumo da Resposta da IA:** ...
-- **Análise e Aplicação:** ...
-- **Referência no Código:** ...
-
----

@@ -58,7 +58,33 @@ Em cada módulo foi criado um método chamado estático chamado `InitApp`, que �
       [etc...] Blocos de bytes comprimidos
 
 ## Etapa 2
-### Título etapa 2
+### Design da Busca Simples
+
+A implementação da busca em arquivos grandes é centralizada na classe BuscaArquivosGrandeApp, que encapsula três componentes principais:
+
+1. **Pré-processamento do padrão — CriarTabela**
+
+      -Para otimizar o processo de busca, é construída uma tabela de deslocamentos, usada pelo algoritmo Horspool:
+      -Para cada caractere presente no padrão, armazena-se sua distância em relação ao final do padrão.
+      -Para todos os demais caracteres — aqueles que não ocorrem no padrão — atribui-se um deslocamento igual ao tamanho total do padrão.
+      -Essa tabela permite que a busca avance rapidamente em caso de falhas, evitando retrabalho sobre regiões já descartadas.
+
+2. **Algoritmo de busca — Buscar**
+      - A rotina de busca segue o algoritmo Horspool, uma simplificação direta do Boyer–Moore:
+      - A comparação é feita da direita para a esquerda, começando pelo final do padrão.Essa estratégia acelera a detecção de discrepâncias, já que diferenças no final das palavras são mais frequentes em textos naturais.
+      - Ao identificar uma falha, o deslocamento aplicado é obtido diretamente da tabela gerada em CriarTabela.
+      - O algoritmo é eficiente e simples, mantendo apenas a heurística de caractere ruim, sem utilizar a heurística de sufixo do Boyer–Moore completo.
+
+3. **Controle de execução — InitApp**
+      - A função principal da classe coordena a criação da tabela, a execução da busca e a leitura do arquivo em modo streaming: Leitura em blocos (Buffered I/O)
+      - Em vez de carregar o arquivo inteiro na memória, utiliza-se um FileStream com buffer de aproximadamente 85 KB.
+      - Essa abordagem evita exceções como OutOfMemoryException, comuns quando se tenta carregar arquivos grandes integralmente com ReadAllText.
+      - Tratamento de fronteiras entre blocos (Overlap)
+      - Como o padrão de busca pode estar dividido entre o final de um bloco e o início do próximo, é mantido um mecanismo de sobreposição.
+      - A lógica funciona assim:
+            - São guardados os últimos N−1 caracteres do bloco corrente (onde N é o tamanho do padrão).
+            - Esses caracteres são concatenados ao início do próximo bloco lido.
+            - Dessa forma, qualquer ocorrência que atravesse a fronteira entre buffers pode ser detectada corretamente pelo algoritmo.
 
 ## Etapa 3
 ### Design da Estrutura Indexada
