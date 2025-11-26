@@ -1,16 +1,19 @@
-﻿using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.Text;
+
 
 namespace BuscaArquivoGrande;
 
 public class BuscaArquivoGrandeApp
 {
+    private static int[] tabela = new int[256];
     public static async Task InitApp(string[] args)
     {
 
         int tamanhoBuffer = 85 * 1024; //85KB RECOMENDADO
         string caminhoArquivo = args[1];
         string padraoBusca = args[2].ToLower();
+        tabela = CriarTabela(padraoBusca, padraoBusca.Length);
 
 
         List<int> resultadosBusca = new List<int>();
@@ -61,8 +64,7 @@ public class BuscaArquivoGrandeApp
 
     public static int[] CriarTabela(string padrao, int tamanhoPadrao)
     {
-        int[] tabela = new int[256];
-
+        
         // Inicializa a tabela com o tamanho do padrão
         for (int i = 0; i < tabela.Length; i++)
         {
@@ -72,7 +74,7 @@ public class BuscaArquivoGrandeApp
         for (int j = 0; j < tamanhoPadrao - 1; j++)
         {
             int codigoAsci = (int)padrao[j];
-            if (codigoAsci < 255)
+            if (codigoAsci < 256)
             {
                 tabela[(int)padrao[j]] = tamanhoPadrao - 1 - j;
             }
@@ -91,9 +93,6 @@ public class BuscaArquivoGrandeApp
         int tamanhoTexto = texto.Length;
         int tamanhoPadrao = padrao.Length;
         List<int> ocorrencias_padrao = new List<int>();
-
-
-        int[] tabela = CriarTabela(padrao, tamanhoPadrao);
 
         int i = tamanhoPadrao - 1;
 
