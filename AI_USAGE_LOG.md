@@ -13,41 +13,7 @@ O uso de IA foi permitido para as seguintes finalidades:
 
 É proibido submeter código gerado por IA sem compreendê-lo completamente e sem adaptá-lo ao projeto. Todo trecho de código influenciado pela IA deve ser referenciado neste log.
 
----
-
 ## Registro de Interações
-
-*Copie e preencha o template abaixo para cada interação relevante.*
-
----
-
-### Interação XPTO
-
-- **Data:** loremipsumdolorsitarmet
-
-- **Etapa do Projeto:** loremipsumdolorsitarmet
-
-- **Ferramenta de IA Utilizada:** loremipsumdolorsitarmet
-
-- **Objetivo da Consulta:** loremipsumdolorsitarmet
-
-- **Prompt(s) Utilizado(s):**
-  1. "loremipsumdolorsitarmet"
-  2. "loremipsumdolorsitarmet"
-
-- **Resumo da Resposta da IA:**
-  loremipsumdolorsitarmet
-
-- **Análise e Aplicação:**
-  loremipsumdolorsitarmet
-
-- **Referência no Código:**
-  loremipsumdolorsitarmet
-
-
----
-
----
 
 ### Interação 1
 
@@ -84,9 +50,6 @@ O uso de IA foi permitido para as seguintes finalidades:
   - `dotnet` new console -o Etapa3_BuscaNoCompactado
   - `dotnet` sln add Etapa1_Compressao Etapa2_BuscaSimples Etapa3_BuscaCompactado
 
-
----
----
 
 ### Interação 2
 
@@ -149,9 +112,6 @@ O uso de IA foi permitido para as seguintes finalidades:
 - **Referência no Código:**
   Nenhuma. Porém a organização das pastas é um reflexo disso aí.
 
----
----
-
 ### Iteração 3
 
 - **Data:** 11/11/2025
@@ -172,9 +132,6 @@ A IA utilizou como referência conversas anteriores sobre tecnologias que eu gos
 - **Referência no Código:**
   Sem refencia no codigo
 
----
----
-
 
 ### Iteração 4
 
@@ -194,9 +151,6 @@ A IA utilizou como referência conversas anteriores sobre tecnologias que eu gos
 - **Referência no Código:**
   sem referencia no código
 
-
----
----
 
 ### Iteração 5
 
@@ -246,9 +200,150 @@ catch (Exception ex)
 ```
 
 
+### Interação 06
 
----
----
+* **Data:** 22/11/2025
+
+* **Etapa do Projeto:** Compressão
+
+* **Ferramenta de IA Utilizada:** Gemini
+
+* **Objetivo da Consulta:** Definir um tamanho ideal para o bloco de compressão Huffman, equilibrando desempenho de I/O e consumo de memória RAM.
+
+* **Prompt(s) Utilizado(s):**
+
+  1. "tô fazendo compressão Huffman em C#, que tamanho de bloco você recomenda pra lidar com arquivo grande e ainda conseguir fazer busca depois?"
+  2. "faz sentido usar 64KB ou 256KB como tamanho de bloco? qual é a lógica por trás desses valores?"
+
+* **Resumo da Resposta da IA:**
+  A IA sugeriu que tamanhos entre 64 KB e 256 KB são bons *trade-offs*. 64 KB alinha-se bem com a otimização de I/O de sistemas operacionais e mantém o overhead de memória da árvore de Huffman por bloco baixo.
+
+* **Análise e Aplicação:**
+  O valor de **64 * 1024** foi adotado como constante `TAMANHO_BLOCO` para a classe de compressão. Isso limita o consumo máximo de RAM durante a descompressão seletiva na Etapa 3.
+
+* **Referência no Código:**
+  `private const int TAMANHO_BLOCO = 64 * 1024;` (Classe `CompressaoApp`)
+
+
+### Interação 07
+
+* **Data:** 22/11/2025
+
+* **Etapa do Projeto:** Compressão (Cálculo de Metadados)
+
+* **Ferramenta de IA Utilizada:** Gemini
+
+* **Objetivo da Consulta:** Obter a fórmula correta para calcular o número total de blocos a partir do tamanho do arquivo, garantindo que o último bloco parcial seja contado (função teto em inteiros).
+
+* **Prompt(s) Utilizado(s):**
+
+  1. "como que eu calculo o número de blocos só com aritmética inteira em C#, tipo fazendo teto(tamanhoTotal / tamanhoBloco)?"
+  2. "pode explicar por que a fórmula (A + B - 1) / B funciona como teto na divisão inteira?"
+
+* **Resumo da Resposta da IA:**
+  A IA forneceu a fórmula `(tamanhoTotal + tamanhoBloco - 1) / tamanhoBloco`, explicando que o termo `-1` é necessário para neutralizar o arredondamento para baixo (truncamento) da divisão de inteiros.
+
+* **Análise e Aplicação:**
+  A fórmula foi implementada no início da compactação para determinar a contagem exata de blocos a serem processados e para alocar o espaço correto para o Índice de Blocos.
+
+* **Referência no Código:**
+  `int numeroBlocos = (int)((tamanhoOriginalTotalBytes + TAMANHO_BLOCO - 1) / TAMANHO_BLOCO);` (Classe `CompressaoApp`)
+
+
+### Interação 08
+
+* **Data:** 22/11/2025
+
+* **Etapa do Projeto:** Busca (Implementação do Janelamento)
+
+* **Ferramenta de IA Utilizada:** Gemini
+
+* **Objetivo da Consulta:** Criar a lógica para tratar ocorrências de substrings que atravessam a fronteira de dois blocos, usando o conceito de Janelamento.
+
+* **Prompt(s) Utilizado(s):**
+
+  1. "tô descompactando o arquivo em blocos e procurando uma substring em cada um; como faço o janelamento pra não perder quando o padrão começa num bloco e termina no outro? se puder, mostra em C#."
+  2. "se o padrão tem tamanho L, qual é exatamente o pedaço do bloco anterior que eu preciso guardar pra usar junto com o próximo bloco?"
+
+* **Resumo da Resposta da IA:**
+  A IA sugeriu manter um **sufixo** do bloco anterior de tamanho igual a $L-1$ (tamanho do padrão - 1). Este sufixo é concatenado ao novo bloco para criar uma "janela" de busca. O código de *substring* para a janela e a atualização do sufixo (`sufixoAnterior = textoBloco;`) foram fornecidos.
+
+* **Análise e Aplicação:**
+  A lógica de janelamento foi implementada na função `BuscarNoArquivoComprimido`. A variável `sufixoAnterior` foi usada para armazenar o bloco descompactado inteiro, e o cálculo do sufixo foi feito via `Substring` com `tamanhoPadrao - 1`.
+
+* **Referência no Código:**
+
+  ```
+  // Lógica influenciada pela IA na função BuscarNoArquivoComprimido
+  string sufixo = tamanhoSufixo > 0 
+      ? sufixoAnterior.Substring(sufixoAnterior.Length - tamanhoSufixo, tamanhoSufixo) 
+      : string.Empty;
+  string janela = sufixo + textoBloco;
+  // ...
+  sufixoAnterior = textoBloco; // Atualização do sufixo
+  ```
+
+### Interação 09
+
+* **Data:** 22/11/2025
+
+* **Etapa do Projeto:** Busca (Conversão de Posição Global)
+
+* **Ferramenta de IA Utilizada:** Gemini
+
+* **Objetivo da Consulta:** Ajustar as posições das ocorrências encontradas dentro da janela de busca local para posições globais no arquivo original, considerando o *offset* e o sufixo.
+
+* **Prompt(s) Utilizado(s):**
+
+  1. "como que eu transformo essa posição local na posição global do arquivo original usando o OffsetOriginal do bloco e o tamanho do sufixo?"
+
+* **Resumo da Resposta da IA:**
+  A IA explicou que a posição global é o `OffsetOriginal` do bloco, ajustado pelo início do sufixo e mais a posição local. A fórmula básica é: `posGlobal = (bloco.OffsetOriginal - tamanhoSufixo) + posLocal`.
+
+* **Análise e Aplicação:**
+  A fórmula de conversão de posição foi implementada no loop de resultados locais. Isso garante que as ocorrências que caem na área de sobreposição (`sufixo`) sejam mapeadas corretamente para o início do bloco anterior.
+
+* **Referência no Código:**
+
+  ```
+  // Lógica de conversão influenciada pela IA na função BuscarNoArquivoComprimido
+  foreach (int posLocal in ocorrenciasLocal)
+  {
+      long posGlobal = (bloco.OffsetOriginal - tamanhoSufixo) + posLocal;
+      resultadosGlobais.Add(posGlobal);
+  }
+  ```
+
+
+### Interação 10
+
+* **Data:** 22/11/2025
+
+* **Etapa do Projeto:** Debugging (Descompressão Huffman)
+
+* **Ferramenta de IA Utilizada:** Gemini
+
+* **Objetivo da Consulta:** Investigar por que a Etapa 2 (busca simples) funcionava corretamente, enquanto a Etapa 1 (compressão/descompressão Huffman) estava gerando tamanhos errados e menos ocorrências de substring do que o esperado.
+
+* **Prompt(s) Utilizado(s):**
+
+  1. "a parte 2 (busca simples) está funcionando, mas a parte 1 (compressão/descompressão Huffman) parece estar com problema na descompressão; você consegue me ajudar a identificar onde está o bug?"
+
+* **Resumo da Resposta da IA:**
+  A IA apontou dois problemas principais: um descasamento na ordem dos bits entre o BitWriter e o leitor de Huffman, e erros no cabeçalho ao gravar/ler caracteres Unicode (uso de byte para char). Também sugeriu ajustar o tipo do contador de símbolos para evitar estouro.
+
+* **Análise e Aplicação:**
+  A partir da resposta, reescrevi a lógica do BitWriter para preencher os bits na mesma ordem usada pelo leitor, corrigi o cabeçalho para gravar os caracteres como ushort e aumentei o tipo do contador de símbolos. Depois de recompilar e gerar novamente os arquivos .comp, os tamanhos descompactados passaram a bater com o arquivo original e a contagem de ocorrências ficou alinhada com a Etapa 2.
+
+* **Referência no Código:**
+
+* Classe BitWriter em Compressao/BitWriter.cs (reescrita da rotina de escrita de bits).
+
+* Ajustes em CabecalhoArquivo.cs para gravar símbolos como ushort e contador como int.
+
+* Ajustes simétricos de leitura em BuscarArquivoCompactadoApp.DescomprimirBlocoHuffman().
+
+
 
 ### `Interação Exemplo (APAGAR NO FINAL)`
 
