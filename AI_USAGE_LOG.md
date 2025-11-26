@@ -175,26 +175,6 @@ A IA utilizou como referência conversas anteriores sobre tecnologias que eu gos
 ---
 ---
 
-### Iteração 4
-
-- **Data:** 24/11/2025
-- **Etapa do Projeto:** Escolha entre os algoritmos KMP E Boyer-Moore
-- **Ferramenta de IA Utilizada:** Gemini Advanced
-- **Objetivo da Consulta:** O trabalho envolvia recomendações de código, então a pesquisa foi direcionada à performance dos algoritmos e às possíveis dificuldades na implementação.
-- **Prompt(s) Utilizado(s):**
-  1. "Gemini, preciso desenvolver uma função que faz busca de string em um arquivo grande. Recomenda usar Knuth-Morris-Pratt (KMP) ou Boyer-Moore? Faça uma análise de cada um e mostre as dificuldades na implementação de cada um."
-
-- **Resumo da Resposta da IA:**
-  A IA explicou a diferença entre os algoritmos e simulou a criação de uma tabela-verdade para cada código, verificando por meio de perguntas se eu estava entendendo o algoritmo.
-
-- **Análise e Aplicação:**
-  A resposta da IA foi util para entender a diferença entre os algoritmos.
-
-- **Referência no Código:**
-  sem referencia no código
-
----
----
 
 ### Iteração 4
 
@@ -292,15 +272,3 @@ catch (Exception ex)
 
 ---
 
-### Interação 2
-
-- **Data:** ...
-- **Etapa do Projeto:** ...
-- **Ferramenta de IA Utilizada:** ...
-- **Objetivo da Consulta:** ...
-- **Prompt(s) Utilizado(s):** ...
-- **Resumo da Resposta da IA:** ...
-- **Análise e Aplicação:** ...
-- **Referência no Código:** ...
-
----
