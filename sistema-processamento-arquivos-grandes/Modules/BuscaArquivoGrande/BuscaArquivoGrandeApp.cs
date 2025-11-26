@@ -78,11 +78,6 @@ public class BuscaArquivoGrandeApp
             {
                 tabela[(int)padrao[j]] = tamanhoPadrao - 1 - j;
             }
-            else
-            {
-                Console.WriteLine(codigoAsci);
-
-            }
         }
 
         return tabela;
