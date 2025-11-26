@@ -32,15 +32,16 @@ public static class Descompressao
         {
             //Lê os bytes de um caractere, que está em utf16
             ushort codigoChar = BitConverter.ToUInt16(bytesDoArquivoCompactado, index);
-            index += 2;
+            index += 2; //pula p/ prox seção do header
 
             //lê os bytes de frequência para aquele caractere
             long frequencia = BitConverter.ToInt64(bytesDoArquivoCompactado, index);
-            index += 8;
+            index += 8; //pula p/ prox seção do header
 
-            //TODO: CONTINUAR
-
+            dicionarioCaractereQuantidade.Add((char)codigoChar, frequencia);
         }
+
+
 
 
 
@@ -59,8 +60,9 @@ public static class Descompressao
         // index += (int)tamanhoHeader;
 
 
-        // int posicao = 0;                        ///? Só pra ter certeza, mas oq faz o ref? é um ponteiro?
+        int posicao = 0;                        ///? Só pra ter certeza, mas oq faz o ref? é um ponteiro?
         // NoArvoreDescompressao raiz = RecriaNosArvoreRecursivamente(header, ref posicao);
+        NoArvoreDescompressao raiz = ReconstruirArvore(dicionarioCaractereQuantidade);
 
         long numeroBitsValidos = BitConverter.ToInt64(bytesDoArquivoCompactado, index);
         index += 4;
@@ -72,6 +74,7 @@ public static class Descompressao
 
         using var arquivoDescompactado = new FileStream(nomeArquivoDescompactado, FileMode.Create, FileAccess.Write);
 
+
         NoArvoreDescompressao noArvoreAtual = raiz;
         int bitsLidos = 0;
 
@@ -81,7 +84,7 @@ public static class Descompressao
             byte byteAtualmenteLido = comprimidos[i];
             for (int bit = 7; bit >= 0 && bitsLidos < numeroBitsValidos; bit --)
             {
-                int valorBit = (bit >> bit) & 1;
+                int valorBit = (byteAtualmenteLido >> bit) & 1;
                 bitsLidos++;
 
                 /// ?????
@@ -96,28 +99,36 @@ public static class Descompressao
         }
 
 
-
-
         Console.WriteLine("Arquivo descomprimido com sucesso!");
 
     }
-                                                            //são real os dados comprimidos?
-    private static NoArvoreDescompressao RecriaNosArvoreRecursivamente(byte[] dadosComprimidos, ref int posicao)
+
+    private static NoArvoreDescompressao ReconstruirArvore(Dictionary<char,long> freq)
+{
+    var fila = new PriorityQueue<NoArvoreDescompressao, long>();
+
+    foreach (var kv in freq)
     {
-        var dadoSendoLido = dadosComprimidos[posicao++];
-        //tipo doq?
-        char tipo = (char)dadoSendoLido;
-        NoArvoreDescompressao noDeDescompressao = new();
-
-        if (tipo == 'L') ///? donde saiu esse L?
-        {
-            noDeDescompressao.CaractereEmByte = dadoSendoLido;
-        } else //I      ///? donde saiu esse I?
-        {
-            noDeDescompressao.Esquerda = RecriaNosArvoreRecursivamente(dadosComprimidos, ref posicao);
-            noDeDescompressao.Direita = RecriaNosArvoreRecursivamente(dadosComprimidos, ref posicao);
-        }
-
-        return noDeDescompressao;
+        fila.Enqueue(new NoArvoreDescompressao {
+            CaractereEmByte = (byte)kv.Key
+        }, kv.Value);
     }
+
+    while (fila.Count > 1)
+    {
+        fila.TryDequeue(out var esq, out var fe1);
+        fila.TryDequeue(out var dir, out var fe2);
+
+        var pai = new NoArvoreDescompressao {
+            Esquerda = esq,
+            Direita = dir
+        };
+
+        fila.Enqueue(pai, fe1 + fe2);
+    }
+
+    fila.TryDequeue(out var raiz, out _);
+    return raiz;
+}
+
 }
