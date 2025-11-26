@@ -62,5 +62,4 @@ dotnet run -- buscar_compactado dados/entrada.comp "erro 404"
 
 Saída esperada: offsets relativos ao arquivo original, calculados com base no índice de blocos.
 
-```
 
