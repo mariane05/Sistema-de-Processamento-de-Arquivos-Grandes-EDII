@@ -35,7 +35,13 @@ Onde:
 Em cada módulo foi criado um método chamado estático chamado `InitApp`, que é o ponto de entrada da chamada do `MainApp`
 
 ## Etapa 1
-### Título etapa 1
+### Cabeçalho
+
+      [1 byte] quantidade_de_caracteres
+      [10 bytes por caractere]
+         - 2 bytes: caractere (UTF16)
+         - 8 bytes: frequência
+      [dados_comprimidos]
 
 ## Etapa 2
 ### Título etapa 2
