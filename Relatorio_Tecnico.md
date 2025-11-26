@@ -1,5 +1,3 @@
----
-
 ## Etapa 3
 **Design da Estrutura Indexada**
 
