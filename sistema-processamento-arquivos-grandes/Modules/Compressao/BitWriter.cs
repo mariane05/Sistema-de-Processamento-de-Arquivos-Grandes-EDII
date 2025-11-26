@@ -14,7 +14,7 @@ public static class BitWriter
 
         foreach (char caractere in texto)
         {
-            if (!dicionarioCodigoCaractere.TryGetValue(caractere, out string codigo))
+            if (!dicionarioCodigoCaractere.TryGetValue(caractere, out string? codigo))
             {
                 throw new InvalidOperationException($"Não há código para '{caractere}'.");
             }
