@@ -12,7 +12,7 @@ public class BuscaArquivoGrandeApp
 
         int tamanhoBuffer = 85 * 1024; //85KB RECOMENDADO
         string caminhoArquivo = args[1];
-        string padraoBusca = args[2].ToLower();
+        string padraoBusca = args[2];
        
 
 
@@ -36,7 +36,7 @@ public class BuscaArquivoGrandeApp
             while ((bytesLidos = await fs.ReadAsync(bufferLeitura, 0, bufferLeitura.Length)) > 0)
             {
                 string texto = sobra + Encoding.UTF8.GetString(bufferLeitura, 0, bytesLidos);
-                resultadosBusca.AddRange(Buscar(texto.ToLower(), padraoBusca));
+                resultadosBusca.AddRange(Buscar(texto, padraoBusca));
 
                 if (texto.Length >= padraoBusca.Length - 1)
                     sobra = texto[^(padraoBusca.Length - 1)..];
