@@ -36,8 +36,18 @@ public class MainApp ()
     public static void validaParamsCompressao(string[] args)
     {
         //TODO: adicionar validações dos parâmetros <arquivo_original> && <arquivo_compactado> ao chamar o módulo
+
+        /*
+        IMPLEMENTAR DEPOIS QUE A COMPRESSÃO ESTIVER CERTINHO
+        if (args[2] == null || args[2].Length == 0)
+        {
+            Console.WriteLine("Não foi encontrado o nome que será atribuido ao arquivo compactado!");
+            return;
+        }
+        */
         
-        CompressaoApp.InitApp();
+
+        CompressaoApp.InitApp(args);
     }
 
     public static void validaParamsBuscaArquivoGrande(string[] args)
