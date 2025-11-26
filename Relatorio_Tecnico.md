@@ -38,7 +38,7 @@ Em cada módulo foi criado um método chamado estático chamado `InitApp`, que �
 ### Título etapa 1
 
 ## Etapa 2
-###Design da Busca Simples
+### Design da Busca Simples
 
 A implementação da busca em arquivos grandes é centralizada na classe BuscaArquivosGrandeApp, que encapsula três componentes principais:
 
