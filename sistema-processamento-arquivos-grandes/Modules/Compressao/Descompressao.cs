@@ -41,26 +41,6 @@ public static class Descompressao
             dicionarioCaractereQuantidade.Add((char)codigoChar, frequencia);
         }
 
-
-
-
-
-        ///? não teria que ler para int64?
-        // long tamanhoHeader = BitConverter.ToInt64(bytesDoArquivoCompactado, index);
-        // Console.WriteLine($"  >>>>>  Tamanho do Cabeçalho lido: {tamanhoHeader}");
-        
-        //pula p/ próximo byte
-        // index += 4;
-
-        // byte[] header = new byte[tamanhoHeader];
-        ///? Como funciona esse Array.Copy, quais seus parâmetros e porque ele está sendo usado aqui?
-        // Array.Copy(bytesDoArquivoCompactado, index, header, 0, tamanhoHeader);
-        
-        //avança todo o cabeçalho
-        // index += (int)tamanhoHeader;
-
-
-        int posicao = 0;                        ///? Só pra ter certeza, mas oq faz o ref? é um ponteiro?
         // NoArvoreDescompressao raiz = RecriaNosArvoreRecursivamente(header, ref posicao);
         NoArvoreDescompressao raiz = ReconstruirArvore(dicionarioCaractereQuantidade);
 
