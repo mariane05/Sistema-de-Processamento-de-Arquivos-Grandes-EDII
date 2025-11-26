@@ -1,47 +1,20 @@
-﻿namespace Compressao;
+﻿using static Compressao.LeituraArquivo;
+using static Compressao.DicionarioFrequencia;
+using static Compressao.ConstruirArvore.ArvoreBuilder;
+using static Compressao.GerarCodigosBinarios;
+
+namespace Compressao;
 
 public class CompressaoApp
 {
     public static void InitApp(string[] args)
     {
-        string caminhoArquivo = LeituraArquivo.separaCaminhoDoArquivo(args);
-        var dicionarioDeFrequencias = DicionarioFrequencia.construirDicionarioDeFrequências(caminhoArquivo);
-        // DicionarioFrequencia.testeGerarDicionarioFrequencia(caminhoArquivo);
+        string caminhoArquivo = separaCaminhoDoArquivo(args);
+        var dicionarioDeFrequencias = construirDicionarioDeFrequências(caminhoArquivo);
+        var noRaiz = BuildArvore(dicionarioDeFrequencias);
+        var dicionarioDeCodigos = gerarTodosOsCodigos(noRaiz);
         
         Console.WriteLine("Finalizada a Compressao");
     }
-    
-
-    // public static void testeLerArquivo(string caminhoArquivo)
-    // {
-        
-    //     DicionarioFrequencia.testeGerarDicionarioFrequencia(caminhoArquivo);
-    // }
-
-
-
-
-
-    // static string lerPrimeiraLinhaArquivo(string caminhoArquivo)
-    // {
-    //     string? primeiraLinha;
-
-    //     if(File.Exists(caminhoArquivo))
-    //     {
-    //         using (StreamReader reader = new StreamReader(caminhoArquivo))
-    //         {
-    //             primeiraLinha = reader.ReadLine();
-
-    //             if(primeiraLinha == null) return "O arquivo está vazio";
-    //         }
-
-    //         return primeiraLinha;    
-    //     } else {
-
-    //         return $"Arquivo {caminhoArquivo} não encontrado";
-    //     }
-        
-        
-    // } 
     
 }

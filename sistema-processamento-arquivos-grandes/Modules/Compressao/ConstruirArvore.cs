@@ -1,30 +1,30 @@
 namespace Compressao;
 
-public static class ConstruirArvoreHuffman
+public static class ConstruirArvore
 {
-    public class NoArvoreHuffman
+    public class NoArvore
     {
         public char? Simbolo {get; set;} //todo: descobrir o que {get; set;} faz
         public long Frequencia {get; set;}
 
-        public NoArvoreHuffman? Esquerda {get; set;} //Pq tem que começar com UpperCase?
-        public NoArvoreHuffman? Direita  {get; set;}
+        public NoArvore? Esquerda {get; set;} //Pq tem que começar com UpperCase?
+        public NoArvore? Direita  {get; set;}
     }
 
 
 
     public static class ArvoreBuilder
     {
-        public static NoArvoreHuffman BuildArvore(Dictionary<char, long> frequenciaDic)
+        public static NoArvore BuildArvore(Dictionary<char, long> frequenciaDic)
         {
             //why?
-            var filaPrioridades = new PriorityQueue<NoArvoreHuffman, long>();
+            var filaPrioridades = new PriorityQueue<NoArvore, long>();
 
             //craindo um nó para cada símbolo
             foreach (var item in frequenciaDic)
             {
                 filaPrioridades.Enqueue(
-                    new NoArvoreHuffman
+                    new NoArvore
                     {
                         Simbolo = item.Key,
                         Frequencia = item.Value
@@ -42,7 +42,7 @@ public static class ConstruirArvoreHuffman
 
                 var frequenciaTotalDosFilhos = noFilhoEsquerda.Frequencia + noFilhoDireita.Frequencia;
 
-                var noPai = new NoArvoreHuffman
+                var noPai = new NoArvore
                 {
                     Simbolo = null,
                     Frequencia = frequenciaTotalDosFilhos,
