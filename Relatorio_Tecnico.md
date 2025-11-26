@@ -1,5 +1,47 @@
+## Projeto
+### Linguagem
+A linguagem escolhida para o desenvolvimento do projeto foi o C#. A discussão inicial da equipe foi usar python, principalmente pela facilidade e velocidade de desenvolvimento. Mas dado os requisitos técnicos do trabalho, de performance e gerenciamento eficaz de memória, junto de uma rápida pesquisa, o grupo viu que essa não era a linguagem ideal para isso. 
+
+Ainda se mantendo dentro dos parâmetros de facilidade e velocidade de desenvolvimento, ficamos entre C++ e C#. Apesar de C++ ter um maior despenho, a equipe viu que a sintaxe da linguagem, junto do gerenciamento de memória mais manual, não seria o melhor em tempos de "facilidade e velocidade". 
+
+Desta forma, foi escolhido C#, por conta da sua sintaxe muito semelhante ao Java, linguagem amplamente abordada na faculdade e por conta do C# ter um Garbage Collector (GC) próprio, mas que não era tão rígido quanto o Java, permitindo assim que pudéssemos fazer alterações para melhoria e desempenho onde fosse necessário. 
+
+### Estrutura de pastas/arquitetura de projeto
+A ideia principal foi separar cada etapa (que foi dividida para cada um dos membros da equipe) em módulos, para evitar o máximo possível de conflito de código ou qualquer outro problema possível disso.
+
+Inicialmente foram criados 3 módulos separados, cada um sendo um projeto de console diferente. Mas diante de uma revisão das especificações do trabalho, a parte que mostrou os comandos que seriam usados (e.g. `meu_programa compactar <arquivo_original> <arquivo_compactado>`) evidenciou que seria melhor ter um módulo que atuaria como "Gateway", redirecionando o uso para os 3 outros módulos. No entanto, para que isso ocorresse, era necessário que os módulos deixassem de ser aplicações de console, tornando-se libs internas do projeto, e assim foi feito.
+
+Logo, a estrutura do projeto ficou separada da seguinte forma:
+
+      - AppSpag
+      - Modules
+         ∟ BuscaArquivoCompactado
+         ∟ BuscaArquivoGrande
+         ∟ Compressao
+
+Onde:
+- **`AppSpag`** (Spag == Sistema de Processamento de Arquivos Grandes)
+   - É a aplicação console principal do projeto, com o código fonte contido em `MainApp`
+   - Recebe os parâmetros do terminal e redireciona para cada módulo
+   - Realiza a validação de argumentos vindos do terminal antes de redirecionar para os módulos
+
+- **`Modules/BuscaArquivoCompactado`**
+   - Lib referente à [Etapa 3](#etapa-3)
+- **`Modules/BuscaArquivoGrande`**
+   - Lib referente à [Etapa 2](#etapa-2)
+- **`Modules/Compressao`**
+   - Lib referente à [Etapa 1](#etapa-1)
+
+Em cada módulo foi criado um método chamado estático chamado `InitApp`, que é o ponto de entrada da chamada do `MainApp`
+
+## Etapa 1
+### Título etapa 1
+
+## Etapa 2
+### Título etapa 2
+
 ## Etapa 3
-**Design da Estrutura Indexada**
+### Design da Estrutura Indexada
 
 Para permitir busca direta em arquivos compactados sem descompactação total, adotamos um formato **indexado em blocos**. O arquivo compactado é estruturado em três partes:
 
@@ -25,7 +67,7 @@ A navegação pelo arquivo é feita com *seeks* constantes por bloco, garantindo
 
 ---
 
-**Funcionalidade da Busca no Arquivo Compactado**
+### Funcionalidade da Busca no Arquivo Compactado
 
 A busca em arquivo compactado é implementada em `BuscarArquivoComprimidoApp.BuscarNoArquivoComprimido` e segue o pipeline abaixo:
 
@@ -64,7 +106,7 @@ O reuso do algoritmo de busca da Etapa 2 garante consistência de comportamento 
 
 ---
 
-**Estratégias de Memória e Evolução em Relação à Etapa 2**
+### Estratégias de Memória e Evolução em Relação à Etapa 2
 
 A principal preocupação de projeto foi adequar a busca ao cenário de **arquivos maiores do que a RAM disponível**. Houve uma evolução clara da Etapa 2 para a Etapa 3.
 
