@@ -1,80 +1,94 @@
-﻿using System;
-using BuscaArquivoCompactado;
+﻿using BuscaArquivoCompactado;
 using BuscaArquivoGrande;
 using Compressao;
+using System.Diagnostics;
 
-public class MainApp
+
+public class MainApp ()
 {
     public static void Main(string[] args)
     {
-        if (args == null || args.Length == 0)
+
+        
+
+        if(args == null || args.Length == 0)
         {
-            Console.WriteLine("Nenhum argumento foi passado. Escolha um programa para executar.");
+            Console.WriteLine("Nenhum argumento foi passado. Escolha um programa para executar");
             return;
         }
 
         switch (args[0])
         {
             case "compactar":
-                ValidaParamsCompressao(args);
+                validaParamsCompressao(args);
                 break;
-
             case "buscar_simples":
-                ValidaParamsBuscaArquivoGrande(args);
+                validaParamsBuscaArquivoGrande(args);
                 break;
-
             case "buscar_compactado":
-                ValidaParamsBuscaArquivoCompactado(args);
+                validaParamsBuscaArquivoCompactado(args);
                 break;
-
             default:
                 Console.WriteLine("Programa não encontrado");
                 break;
+
         }
+        
     }
 
-    private static void ValidaParamsCompressao(string[] args)
+    public static void validaParamsCompressao(string[] args)
     {
-        // Esperado: compactar <arquivo_original> <arquivo_compactado>
-        if (args.Length < 3)
+        //TODO: adicionar validações dos parâmetros <arquivo_original> && <arquivo_compactado> ao chamar o módulo
+
+        /*
+        IMPLEMENTAR DEPOIS QUE A COMPRESSÃO ESTIVER CERTINHO
+        if (args[2] == null || args[2].Length == 0)
         {
-            Console.WriteLine("Parâmetros insuficientes para compactar. Uso: compactar <arquivo_original> <arquivo_compactado>");
+            Console.WriteLine("Não foi encontrado o nome que será atribuido ao arquivo compactado!");
             return;
         }
+        */
+        
 
         CompressaoApp.InitApp(args);
     }
 
-    private static void ValidaParamsBuscaArquivoGrande(string[] args)
+    public static void validaParamsBuscaArquivoGrande(string[] args)
     {
-        // Esperado: buscar_simples <arquivo_original> "<substring>"
-        if (args.Length < 3)
+        // tempo de execução
+        Stopwatch tempoExecucao = new Stopwatch();
+        tempoExecucao.Start();
+
+        // memoria ram utilizada
+        Process processo = Process.GetCurrentProcess();
+        long memoria = processo.WorkingSet64;
+
+        //TODO: adicionar validações dos parâmetros <arquivo_original> && "<substring>" ao chamar o módulo
+        if(args == null || args.Length < 2)
         {
-            Console.WriteLine("Parâmetros insuficientes para busca em arquivo grande. Uso: buscar_simples <arquivo_original> \"<substring>\"");
+            Console.WriteLine("Parâmetros insuficientes para busca em arquivo compactado.");
             return;
         }
 
-        Console.WriteLine("Iniciando busca em arquivo grande (não compactado)...");
+        Console.WriteLine("Iniciando busca");
         Console.WriteLine($"Arquivo: {args[1]}");
         Console.WriteLine($"Padrão de busca: {args[2]}");
+    
 
         BuscaArquivoGrandeApp.InitApp(args);
+
+        tempoExecucao.Stop();
+        Console.WriteLine($"Tempo de execução: {tempoExecucao.ElapsedMilliseconds}");
+        Console.WriteLine($"Uso de RAM: {memoria / 1024 / 1024} MB");
     }
 
-    private static void ValidaParamsBuscaArquivoCompactado(string[] args)
+    public static void validaParamsBuscaArquivoCompactado(string[] args)
     {
-        // Esperado: buscar_compactado <arquivo_compactado> "<substring>"
-        if (args.Length < 3)
-        {
-            Console.WriteLine("Parâmetros insuficientes para busca em arquivo compactado. Uso: buscar_compactado <arquivo_compactado> \"<substring>\"");
-            return;
-        }
+        //TODO: adicionar validações dos parâmetros <arquivo_compactado> && "<substring>" ao chamar o módulo
 
-        Console.WriteLine("Iniciando busca em arquivo compactado...");
-        Console.WriteLine($"Arquivo compactado: {args[1]}");
-        Console.WriteLine($"Padrão de busca: {args[2]}");
-
-        // aqui é importante passar args!
-        BuscarArquivoComprimidoApp.InitApp(args);
+    
+        BuscaArquivoCompactadoApp.InitApp();
     }
+    
+
 }
