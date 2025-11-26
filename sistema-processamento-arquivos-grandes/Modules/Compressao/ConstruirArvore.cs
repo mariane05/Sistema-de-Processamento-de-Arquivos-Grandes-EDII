@@ -4,58 +4,78 @@ public static class ConstruirArvore
 {
     public class NoArvore
     {
-        public char? Simbolo {get; set;} //todo: descobrir o que {get; set;} faz
-        public long Frequencia {get; set;}
+        public char? Simbolo { get; set; }
+        public long Frequencia { get; set; }
 
-        public NoArvore? Esquerda {get; set;} //Pq tem que começar com UpperCase?
-        public NoArvore? Direita  {get; set;}
+        public NoArvore? Esquerda { get; set; }
+        public NoArvore? Direita  { get; set; }
     }
-
-
 
     public static class ArvoreBuilder
     {
-        public static NoArvore BuildArvore(Dictionary<char, long> frequenciaDic)
+        public static NoArvore BuildArvore(Dictionary<char, long> dicionarioFrequencia)
         {
-            //why?
-            var filaPrioridades = new PriorityQueue<NoArvore, long>();
+            if (dicionarioFrequencia == null || dicionarioFrequencia.Count == 0)
+                throw new ArgumentException("Dicionário de frequências vazio.");
 
-            //craindo um nó para cada símbolo
-            foreach (var item in frequenciaDic)
+            if (dicionarioFrequencia.Count == 1)
             {
-                filaPrioridades.Enqueue(
-                    new NoArvore
-                    {
-                        Simbolo = item.Key,
-                        Frequencia = item.Value
-                    }, 
-                    item.Value //oq é isso?
-                );
+                var kvp = dicionarioFrequencia.First();
+                return new NoArvore
+                {
+                    Simbolo    = kvp.Key,
+                    Frequencia = kvp.Value
+                };
             }
 
-
-            //contar até restar 1           O que diabos isso quer dizer? pq?
-            while(filaPrioridades.Count > 1)
-            {
-                var noFilhoEsquerda = filaPrioridades.Dequeue();
-                var noFilhoDireita = filaPrioridades.Dequeue();
-
-                var frequenciaTotalDosFilhos = noFilhoEsquerda.Frequencia + noFilhoDireita.Frequencia;
-
-                var noPai = new NoArvore
+            var nodes = dicionarioFrequencia
+                .OrderBy(k => k.Value)
+                .ThenBy(k => k.Key)
+                .Select(k => new NoArvore
                 {
-                    Simbolo = null,
-                    Frequencia = frequenciaTotalDosFilhos,
-                    Esquerda = noFilhoEsquerda,
-                    Direita = noFilhoDireita
+                    Simbolo    = k.Key,
+                    Frequencia = k.Value
+                })
+                .ToList();
+
+            while (nodes.Count > 1)
+            {
+                var left  = nodes[0];
+                var right = nodes[1];
+                nodes.RemoveAt(0);
+                nodes.RemoveAt(0);
+
+                var parent = new NoArvore
+                {
+                    Simbolo    = null,
+                    Frequencia = left.Frequencia + right.Frequencia,
+                    Esquerda   = left,
+                    Direita    = right
                 };
 
-                filaPrioridades.Enqueue(noPai, noPai.Frequencia);
+                int idx = nodes.FindIndex(n =>
+                    n.Frequencia > parent.Frequencia ||
+                    (n.Frequencia == parent.Frequencia &&
+                     GetMinSymbol(n) > GetMinSymbol(parent))
+                );
+
+                if (idx < 0)
+                    nodes.Add(parent);
+                else
+                    nodes.Insert(idx, parent);
             }
 
-            return filaPrioridades.Dequeue(); //retorna a árvore final ... but how?
-
+            return nodes[0];
         }
-        
+
+        private static char GetMinSymbol(NoArvore node)
+        {
+            if (node.Simbolo.HasValue)
+                return node.Simbolo.Value;
+
+            char left  = GetMinSymbol(node.Esquerda!);
+            char right = GetMinSymbol(node.Direita!);
+            return left < right ? left : right;
+        }
     }
 }
