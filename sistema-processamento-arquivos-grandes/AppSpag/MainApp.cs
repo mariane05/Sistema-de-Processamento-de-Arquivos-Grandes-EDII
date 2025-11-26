@@ -1,12 +1,15 @@
 ﻿using BuscaArquivoCompactado;
 using BuscaArquivoGrande;
 using Compressao;
+using System.Diagnostics;
+
 
 public class MainApp ()
 {
     public static void Main(string[] args)
     {
 
+        
 
         if(args == null || args.Length == 0)
         {
@@ -52,6 +55,14 @@ public class MainApp ()
 
     public static void validaParamsBuscaArquivoGrande(string[] args)
     {
+        // tempo de execução
+        Stopwatch tempoExecucao = new Stopwatch();
+        tempoExecucao.Start();
+
+        // memoria ram utilizada
+        Process processo = Process.GetCurrentProcess();
+        long memoria = processo.WorkingSet64;
+
         //TODO: adicionar validações dos parâmetros <arquivo_original> && "<substring>" ao chamar o módulo
         if(args == null || args.Length < 2)
         {
@@ -65,6 +76,10 @@ public class MainApp ()
     
 
         BuscaArquivoGrandeApp.InitApp(args);
+
+        tempoExecucao.Stop();
+        Console.WriteLine($"Tempo de execução: {tempoExecucao.ElapsedMilliseconds}");
+        Console.WriteLine($"Uso de RAM: {memoria / 1024 / 1024} MB");
     }
 
     public static void validaParamsBuscaArquivoCompactado(string[] args)
