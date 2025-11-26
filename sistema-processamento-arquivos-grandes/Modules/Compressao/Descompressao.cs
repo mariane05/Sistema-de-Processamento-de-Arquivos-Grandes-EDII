@@ -2,14 +2,14 @@ using static Compressao.ConstruirArvore;
 
 namespace Compressao;
 
-public class NoArvoreDescompressao
-{
-    public byte CaractereEmByte;
-    public NoArvoreDescompressao? Esquerda;
-    public NoArvoreDescompressao? Direita;
+// public class NoArvoreDescompressao
+// {
+//     public byte CaractereEmByte;
+//     public NoArvoreDescompressao? Esquerda;
+//     public NoArvoreDescompressao? Direita;
 
-    public bool EstaNoFimDaArvore => Esquerda == null && Direita == null;
-}
+//     public bool EstaNoFimDaArvore => Esquerda == null && Direita == null;
+// }
 
 public static class Descompressao
 {
@@ -42,7 +42,10 @@ public static class Descompressao
         }
 
         // NoArvoreDescompressao raiz = RecriaNosArvoreRecursivamente(header, ref posicao);
-        NoArvoreDescompressao raiz = ReconstruirArvore(dicionarioCaractereQuantidade);
+        // ReconstruirArvore(dicionarioCaractereQuantidade);
+
+
+        var raiz = ArvoreBuilder.BuildArvore(dicionarioCaractereQuantidade);
 
         long numeroBitsValidos = BitConverter.ToInt64(bytesDoArquivoCompactado, index);
         index += 4;
@@ -55,11 +58,19 @@ public static class Descompressao
         using var arquivoDescompactado = new FileStream(nomeArquivoDescompactado, FileMode.Create, FileAccess.Write);
 
 
-        NoArvoreDescompressao noArvoreAtual = raiz;
+        NoArvore noArvoreAtual = raiz;
+        if(raiz.EstaNoFimDaArvore)
+        {
+            // arquivo com um único caractere repetido
+            for (int i = 0; i < numeroBitsValidos; i++)
+                arquivoDescompactado.WriteByte((byte)raiz.Simbolo.Value);
+
+            return;
+        }
+
+
         int bitsLidos = 0;
-
-
-        for (int i = 0; i < comprimidos.Length && bitsLidos < numeroBitsValidos; i++)
+        for(int i = 0; i < comprimidos.Length && bitsLidos < numeroBitsValidos; i++)
         {
             byte byteAtualmenteLido = comprimidos[i];
             for (int bit = 7; bit >= 0 && bitsLidos < numeroBitsValidos; bit --)
@@ -70,45 +81,20 @@ public static class Descompressao
                 /// ?????
                 noArvoreAtual = (valorBit == 0) ? noArvoreAtual.Esquerda : noArvoreAtual.Direita;
 
+                if(noArvoreAtual == null) throw new Exception("Erro. A árvore foi reconstruída incorretamente.");
+
                 if (noArvoreAtual.EstaNoFimDaArvore)
                 {
-                    arquivoDescompactado.WriteByte(noArvoreAtual.CaractereEmByte);
+                    arquivoDescompactado.WriteByte((byte)noArvoreAtual.Simbolo.Value);
                     noArvoreAtual = raiz;
                 }
             }
-        }
 
+        }
 
         Console.WriteLine("Arquivo descomprimido com sucesso!");
 
     }
 
-    private static NoArvoreDescompressao ReconstruirArvore(Dictionary<char,long> freq)
-{
-    var fila = new PriorityQueue<NoArvoreDescompressao, long>();
-
-    foreach (var kv in freq)
-    {
-        fila.Enqueue(new NoArvoreDescompressao {
-            CaractereEmByte = (byte)kv.Key
-        }, kv.Value);
-    }
-
-    while (fila.Count > 1)
-    {
-        fila.TryDequeue(out var esq, out var fe1);
-        fila.TryDequeue(out var dir, out var fe2);
-
-        var pai = new NoArvoreDescompressao {
-            Esquerda = esq,
-            Direita = dir
-        };
-
-        fila.Enqueue(pai, fe1 + fe2);
-    }
-
-    fila.TryDequeue(out var raiz, out _);
-    return raiz;
-}
 
 }

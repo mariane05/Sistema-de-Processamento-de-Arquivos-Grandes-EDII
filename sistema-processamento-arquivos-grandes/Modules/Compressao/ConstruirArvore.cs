@@ -11,7 +11,7 @@ public static class ConstruirArvore
         public NoArvore? Direita  { get; set; }
 
         //verifica se é nó folha
-        public bool NoSemFilhos => Esquerda == null && Direita == null;
+        public bool EstaNoFimDaArvore => Esquerda == null && Direita == null;
     }
 
     public static class ArvoreBuilder
