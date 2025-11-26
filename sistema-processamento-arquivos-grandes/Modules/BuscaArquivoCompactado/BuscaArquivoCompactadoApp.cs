@@ -7,7 +7,7 @@ using BuscaArquivoGrande;
 
 namespace BuscaArquivoCompactado
 {
-    public class EntradaIndiceBlocos
+    public class EntradaIndiceBlocos // cria get e set do indice
     {
         public long OffsetOriginal { get; set; }      // posição no arquivo original
         public int TamanhoOriginal { get; set; }      // tamanho descomprimido do bloco
@@ -15,7 +15,7 @@ namespace BuscaArquivoCompactado
         public int TamanhoComprimido { get; set; }    // tamanho em bytes desse bloco compactado
     }
 
-    public class BuscarArquivoComprimidoApp
+    public class BuscarArquivoComprimidoApp 
     {
         public static void InitApp(string[] args)
         {
@@ -59,7 +59,7 @@ namespace BuscaArquivoCompactado
             using BinaryReader br = new BinaryReader(fs, Encoding.UTF8);
 
             long tamanhoOriginalTotal;
-            List<EntradaIndiceBlocos> blocos = LerCabecalhoEIndice(br, out tamanhoOriginalTotal);
+            List<EntradaIndiceBlocos> blocos = LerCabecalhoEIndice(br, out tamanhoOriginalTotal); // lê o cabeçalho e o índice
 
             if (blocos.Count == 0)
             {
@@ -76,9 +76,9 @@ namespace BuscaArquivoCompactado
 
             foreach (var bloco in blocos)
             {
-                string textoBloco = DescomprimirBlocoHuffman(br, bloco);
+                string textoBloco = DescomprimirBlocoHuffman(br, bloco); // descomprime o bloco atual
 
-                int tamanhoSufixo = Math.Min(tamanhoPadrao - 1, sufixoAnterior.Length);
+                int tamanhoSufixo = Math.Min(tamanhoPadrao - 1, sufixoAnterior.Length); // quantos chars do sufixo anterior precisamos
                 string sufixo = tamanhoSufixo > 0
                     ? sufixoAnterior.Substring(sufixoAnterior.Length - tamanhoSufixo, tamanhoSufixo)
                     : string.Empty;
@@ -139,9 +139,8 @@ namespace BuscaArquivoCompactado
 
         private static List<EntradaIndiceBlocos> LerCabecalhoEIndice(BinaryReader br, out long tamanhoOriginalTotal)
         {
-            // bate com o que a CompressaoApp escreveu
-            tamanhoOriginalTotal = br.ReadInt64();
-            int numeroBlocos = br.ReadInt32();
+            tamanhoOriginalTotal = br.ReadInt64(); // lê o tamanho total original (indice 64 bits)
+            int numeroBlocos = br.ReadInt32(); // lê o número de blocos (índice 32 bits)
 
             var blocos = new List<EntradaIndiceBlocos>(numeroBlocos);
 
@@ -176,7 +175,6 @@ namespace BuscaArquivoCompactado
 
             for (int i = 0; i < quantidadeSimbolos; i++)
             {
-                // CORREÇÃO: Ler ushort (2 bytes) em vez de ReadByte
                 ushort simboloShort = brBloco.ReadUInt16(); 
                 char simbolo = (char)simboloShort;
 
@@ -197,10 +195,10 @@ namespace BuscaArquivoCompactado
             long posDadosInicio = ms.Position;
             long tamanhoBloco = ms.Length;
 
-            // último byte é o "ultimosBits", mas vamos ignorar isso para a lógica de parada
+            // último byte é o "ultimosBits"
             long posUltimosBits = tamanhoBloco - 1;
             ms.Seek(posUltimosBits, SeekOrigin.Begin);
-            byte _ultimosBits = brBloco.ReadByte(); // lido, mas não usado
+            byte _ultimosBits = brBloco.ReadByte(); // lido, mas não usado aqui
 
             long tamanhoDadosComprimidos = posUltimosBits - posDadosInicio;
             if (tamanhoDadosComprimidos < 0)

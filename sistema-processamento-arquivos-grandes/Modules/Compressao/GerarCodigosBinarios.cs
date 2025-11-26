@@ -2,8 +2,6 @@ using static Compressao.ConstruirArvore;
 
 namespace Compressao;
 
-//TODO: DEBUGAR, ESTUDAR E REESCREVER
-
 public static class GerarCodigosBinarios
 {
     

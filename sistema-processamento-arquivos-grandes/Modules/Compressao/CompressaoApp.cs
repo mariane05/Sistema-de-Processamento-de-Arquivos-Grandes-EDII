@@ -65,6 +65,7 @@ public class CompressaoApp
             // converte os bytes do bloco em string
             string textoBloco = Encoding.UTF8.GetString(buffer, 0, bytesLidos);
 
+            // remove BOM do primeiro bloco, se houver
             if (primeiroBloco)
             {
                 if (textoBloco.Length > 0 && textoBloco[0] == '\uFEFF')
