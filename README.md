@@ -1,7 +1,5 @@
+## Guia Rápido
 ---
-
-````markdown
-# Guia Rápido
 
 ## Pré-requisitos
 - .NET SDK 6.0 ou superior instalado
