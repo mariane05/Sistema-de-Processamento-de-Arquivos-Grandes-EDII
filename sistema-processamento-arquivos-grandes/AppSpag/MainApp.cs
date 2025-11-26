@@ -53,15 +53,27 @@ public class MainApp ()
     public static void validaParamsBuscaArquivoGrande(string[] args)
     {
         //TODO: adicionar validações dos parâmetros <arquivo_original> && "<substring>" ao chamar o módulo
+        if(args == null || args.Length < 2)
+        {
+            Console.WriteLine("Parâmetros insuficientes para busca em arquivo compactado.");
+            return;
+        }
 
-        BuscaArquivoGrandeApp.InitApp();
+        Console.WriteLine("Iniciando busca");
+        Console.WriteLine($"Arquivo: {args[1]}");
+        Console.WriteLine($"Padrão de busca: {args[2]}");
+    
+
+        BuscaArquivoGrandeApp.InitApp(args);
     }
 
     public static void validaParamsBuscaArquivoCompactado(string[] args)
     {
         //TODO: adicionar validações dos parâmetros <arquivo_compactado> && "<substring>" ao chamar o módulo
 
+    
         BuscaArquivoCompactadoApp.InitApp();
     }
+    
 
 }
