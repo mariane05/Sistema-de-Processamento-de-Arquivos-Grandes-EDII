@@ -1,30 +1,62 @@
-﻿namespace BuscaArquivoGrande;
+﻿using System.Text;
+using System.Threading.Tasks;
+
+namespace BuscaArquivoGrande;
 
 public class BuscaArquivoGrandeApp
 {
-    public static void InitApp(string[] args)
+    public static async Task InitApp(string[] args)
     {
-        string caminhoArquivo = args[1].ToLower(); //padronizar  texto inteiro e padrao para minisculo
+
+        int tamanhoBuffer = 85 * 1024; //85KB RECOMENDADO
+        string caminhoArquivo = args[1];
         string padraoBusca = args[2].ToLower();
 
-        // TODO: Implementar leitura eficiente de arquivos grandes
-        string textoArquivo = File.ReadAllText(caminhoArquivo);
-        List<int> resultadosBusca = Buscar(textoArquivo, padraoBusca);
+
+        List<int> resultadosBusca = new List<int>();
+        byte[] bufferLeitura = new byte[tamanhoBuffer];
+
+        string sobra = "";
+
+        try
+        {
+            using FileStream fs = new FileStream(
+                caminhoArquivo,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read,
+                tamanhoBuffer,
+                FileOptions.SequentialScan
+            );
+
+            int bytesLidos;
+            while ((bytesLidos = await fs.ReadAsync(bufferLeitura, 0, bufferLeitura.Length)) > 0)
+            {
+                string texto = sobra + Encoding.UTF8.GetString(bufferLeitura, 0, bytesLidos);
+                resultadosBusca.AddRange(Buscar(texto.ToLower(), padraoBusca));
+
+                if (texto.Length >= padraoBusca.Length - 1)
+                    sobra = texto[^(padraoBusca.Length - 1)..];
+                else
+                    sobra = texto;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Erro ao ler arquivo: " + ex.Message);
+            return;
+        }
 
         if (resultadosBusca.Count > 0)
         {
-            Console.WriteLine($"Padrão encontrado nas posições:");
-
+            Console.WriteLine("Padrão encontrado nas posições:");
             for (int i = 0; i < resultadosBusca.Count; i++)
-            {
-                Console.WriteLine(resultadosBusca[i]);
-            }
+                Console.WriteLine($"{i + 1}º {resultadosBusca[i]}");
         }
         else
         {
             Console.WriteLine("Padrão não encontrado no arquivo.");
         }
-
     }
 
     public static int[] CriarTabela(string padrao, int tamanhoPadrao)
@@ -87,9 +119,9 @@ public class BuscaArquivoGrandeApp
 
             int codigoAsci = (int)texto[i];
 
-            if (codigoAsci < 255)
+            if (codigoAsci < 256)
             {
-                
+
                 i += tabela[codigoAsci];
             }
             else
@@ -99,7 +131,7 @@ public class BuscaArquivoGrandeApp
 
 
         }
-            return ocorrencias_padrao;
+        return ocorrencias_padrao;
     }
 }
 
