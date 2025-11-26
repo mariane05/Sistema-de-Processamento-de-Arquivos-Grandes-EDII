@@ -50,7 +50,6 @@ public class MainApp
         }
 
         CompressaoApp.InitApp(args);
-        // CompressaoAppDois.InitApp(args);
     }
 
     //BUSCA SIMPLES

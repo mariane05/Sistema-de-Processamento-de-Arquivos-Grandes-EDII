@@ -49,9 +49,9 @@ public class CompressaoApp
         int tamanhoEntradaIndice = sizeof(long) + sizeof(int) + sizeof(long) + sizeof(int); // 8+4+8+4 = 24
         long tamanhoIndiceTotal = (long)numeroBlocos * tamanhoEntradaIndice;
 
-        writer.Write(new byte[tamanhoIndiceTotal]); // reserva com zeros
+        writer.Write(new byte[tamanhoIndiceTotal]);
 
-        // 3) processa os blocos
+        // processa os blocos
         var indiceBlocos = new EntradaIndiceBlocos[numeroBlocos];
 
         long offsetOriginalEmChars = 0; // mede em caracteres
