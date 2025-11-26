@@ -4,8 +4,8 @@ public class BuscaArquivoGrandeApp
 {
     public static void InitApp(string[] args)
     {
-        string caminhoArquivo = args[1];
-        string padraoBusca = args[2];
+        string caminhoArquivo = args[1].ToLower(); //padronizar  texto inteiro e padrao para minisculo
+        string padraoBusca = args[2].ToLower();
 
         // TODO: Implementar leitura eficiente de arquivos grandes
         string textoArquivo = File.ReadAllText(caminhoArquivo);
