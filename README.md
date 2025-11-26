@@ -64,7 +64,3 @@ Saída esperada: offsets relativos ao arquivo original, calculados com base no �
 
 ```
 
----
-
-Se quiser, posso gerar esse Markdown diretamente como **arquivo `.md` para download** também.
-```
